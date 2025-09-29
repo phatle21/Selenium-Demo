@@ -4,4 +4,10 @@ There are 2 tables below:
 Function dưới đây được viết
 Tìm số lần xuất hiện của các từ trong một chuỗi.
 
-đề nab
+ép kiểu
+Arrays.toString
+toString
+String hsPrice = seatPriceMap.get("HS");
+int hsPriceInt = Integer.parseInt(hsPrice);
+int amountTicket = 2;
+selectByValue.selectByValue(String.valueOf(amountTicket));
