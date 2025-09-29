@@ -1,4 +1,4 @@
-package org.javahowto;
+package org.javahowto.Strings;
 
 // số lần xuất hiện của các từ trong một chuỗi
 // dùng split chia chuỗi thành một mảng các từ
