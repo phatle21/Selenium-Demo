@@ -10,7 +10,8 @@ public class WebDriverManager {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\phat.le\\Downloads\\chromedriver-win64\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\patri\\Downloads\\chromedriver-win64\\chromedriver.exe");
+      //      System.setProperty("webdriver.chrome.driver", "C:\\Users\\phat.le\\Downloads\\chromedriver-win64\\chromedriver.exe");
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.manage().deleteAllCookies();
