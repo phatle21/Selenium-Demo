@@ -11,3 +11,6 @@ String hsPrice = seatPriceMap.get("HS");
 int hsPriceInt = Integer.parseInt(hsPrice);
 int amountTicket = 2;
 selectByValue.selectByValue(String.valueOf(amountTicket));
+
+random (tự sinh, có mảng số, có mảng chuỗi)
+
