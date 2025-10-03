@@ -18,13 +18,33 @@ public class ShoppingCartPage {
     private By returnToShop = By.xpath("//a[contains(@class, 'btn black')]");
     private By cartIcon = By.xpath("//div[contains(@class, 'pos-static')]//div[contains(@class, 'cart-type1')]/a");
     private By getCartIconIndex = By.xpath("//div[contains(@class, 'pos-static')]//span[contains(@class, 'justify-content-center')]//span[contains(@class, 'et-cart-quantity')]");
-    private By getCongraText = By.xpath("//span[@class='et-cart-progress-success']//span[2]");
+    private By priceCart = By.xpath("//div[contains(@class, 'pos-static')]//span[contains(@class, 'justify-content-center')]//span[contains(@class, 'amount')]");
     private By cartCheckoutNav = By.xpath("//div[@class='cart-checkout-nav']");
+
+    private By getNameProduct = By.xpath("//div[contains(@class, 'row-count-3')]//div[@class='content-product ']//h2/a[.='AirPods']");
 
     public ShoppingCartPage(WebDriver driver, WebDriverWait wait, WebElement element) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.element = element;
+    }
+
+    public By getNameItemByClass(String className) {
+        String xpath = String.format("//div[contains(@class, 'row-count-3')]//div[@class='content-product ']//h2/a[.='%s']", className);
+        return By.xpath(xpath);
+    }
+
+    public String getPriceItem() {
+        String priceCt = driver.findElement(priceCart).getText();
+        return priceCt;
+//        priceIt.replace("$", "");
+//        System.out.println("Giá: " + priceIt);
+//        return priceIt;
+    }
+
+    public String getNameProduct() {
+        String namePrd = driver.findElement(getNameProduct).getText().trim();
+        return namePrd;
     }
 
     public String getEmptyCartMessage() {

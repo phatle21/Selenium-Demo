@@ -64,7 +64,8 @@ public class CheckoutPage {
         return cities[randomIndex];
     }
 
-    public static String getTodayDate() {
+    // dung static thi ko goi dc ??? tsao
+    public String getTodayDate() {
         LocalDate today = LocalDate.now();
       //  return today.toString(); // format: yyyy-MM-dd
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
