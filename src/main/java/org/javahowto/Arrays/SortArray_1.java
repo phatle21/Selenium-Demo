@@ -2,7 +2,7 @@ package org.javahowto.Arrays;
 
 import java.util.Arrays;
 
-public class SortArray {
+public class SortArray_1 {
 
     // using Arrays.sort()
     public static void sortArray(int[] arr) {

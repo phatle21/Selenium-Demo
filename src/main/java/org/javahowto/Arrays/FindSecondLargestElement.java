@@ -4,7 +4,7 @@ package org.javahowto.Arrays;
 // For {10, 10, 10} → No second largest (all values equal)
 // For {1} → Invalid input (not enough elements)
 
-// co nhieu cach
+// How To Find the Second Largest Element in an Array w3schools
 
 import java.util.Arrays;
 
