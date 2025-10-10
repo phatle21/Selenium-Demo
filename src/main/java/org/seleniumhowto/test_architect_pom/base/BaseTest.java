@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import io.github.bonigarcia.wdm.WebDriverManager; // ✅ thêm import này
 
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
 
@@ -28,7 +30,7 @@ public class BaseTest {
         this.useFreshChromeDriver = useFreshChromeDriver;
     }
 
-    @Before
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         try {
             if (useFreshChromeDriver) {
@@ -38,6 +40,12 @@ public class BaseTest {
                 logger.info("Initializing singleton WebDriver");
                 driver = CustomWebDriverManager.getDriver();
             }
+
+            // Ensure driver is initialized before using it
+            if (driver == null) {
+                throw new RuntimeException("WebDriver initialization failed");
+            }
+
             wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             logger.info("WebDriver and WebDriverWait initialized successfully");
         } catch (Exception e) {
@@ -46,7 +54,7 @@ public class BaseTest {
         }
     }
 
-    @After
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         try {
             if (driver != null) {

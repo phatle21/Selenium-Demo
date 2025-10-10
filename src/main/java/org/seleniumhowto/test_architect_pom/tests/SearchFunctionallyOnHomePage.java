@@ -36,6 +36,9 @@ public class SearchFunctionallyOnHomePage extends BaseTest {
         test = extent.createTest("Search Functionality Test");
 
         try {
+            // Ensure WebDriver is initialized
+            Assert.assertNotNull(driver, "WebDriver is null, initialization failed");
+
             // Step 1: Go to home page and close popup
             homePage.goToHomePage();
             homePage.clickPopupAd();
@@ -61,6 +64,6 @@ public class SearchFunctionallyOnHomePage extends BaseTest {
 
     @AfterSuite
     public void tearDownReport() {
-        extent.flush(); // ✅ Xuất file HTML report
+        extent.flush(); // Export HTML report
     }
 }

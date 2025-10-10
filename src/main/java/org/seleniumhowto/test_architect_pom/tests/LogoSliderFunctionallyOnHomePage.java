@@ -2,8 +2,6 @@ package org.seleniumhowto.test_architect_pom.tests;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.seleniumhowto.test_architect_pom.base.BaseTest;
 import org.seleniumhowto.test_architect_pom.pages.*;
 
