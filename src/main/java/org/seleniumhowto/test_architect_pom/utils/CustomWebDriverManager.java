@@ -2,54 +2,32 @@ package org.seleniumhowto.test_architect_pom.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager; // ✅ thêm import này
-import java.util.concurrent.TimeUnit;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class CustomWebDriverManager {
+
     private static WebDriver driver;
 
-    public static WebDriver createNewChromeDriver() {
-        try {
-            io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
-            WebDriver freshDriver = new ChromeDriver();
-            freshDriver.manage().window().maximize();
-            freshDriver.manage().deleteAllCookies();
-            freshDriver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-            freshDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            return freshDriver;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create new ChromeDriver: " + e.getMessage());
-        }
-    }
-
-
+    // Singleton pattern for getting the WebDriver instance
     public static WebDriver getDriver() {
         if (driver == null) {
-            try {
-                // ✅ Dòng này mới đúng
-                WebDriverManager.chromedriver().setup();
-
-                driver = new ChromeDriver();
-                driver.manage().window().maximize();
-                driver.manage().deleteAllCookies();
-                driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-                driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to initialize WebDriver: " + e.getMessage());
-            }
+            WebDriverManager.chromedriver().setup();  // Setup the chromedriver automatically
+            driver = new ChromeDriver();  // Initialize the WebDriver
         }
         return driver;
     }
 
+    // Create a new ChromeDriver instance each time
+    public static WebDriver createNewChromeDriver() {
+        WebDriverManager.chromedriver().setup();  // Setup chromedriver
+        return new ChromeDriver();  // Return a new instance of ChromeDriver
+    }
+
+    // Quit the WebDriver instance
     public static void quitDriver() {
         if (driver != null) {
-            try {
-                driver.quit();
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to quit WebDriver: " + e.getMessage());
-            } finally {
-                driver = null;
-            }
+            driver.quit();
+            driver = null;
         }
     }
 }
