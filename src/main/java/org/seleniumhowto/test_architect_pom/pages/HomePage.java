@@ -1,15 +1,17 @@
 package org.seleniumhowto.test_architect_pom.pages;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class HomePage {
     private final WebDriver driver;
@@ -72,6 +74,33 @@ public class HomePage {
         // logo nắm để kéo
         swipeSlide(lgImage, 600);
 
+        // Take screenshot after swipe
+        takeScreenshot("swiper_slide_disappear");
+    }
+
+    // Hàm chụp screenshot
+    private void takeScreenshot(String screenshotName) {
+        try {
+            // Get current timestamp for unique filename
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+            String fileName = screenshotName + "_" + timestamp + ".png";
+
+            // Capture screenshot
+            File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+            // Define destination path (e.g., "screenshots" folder in project directory)
+            File destinationFile = new File("screenshots/" + fileName);
+
+            // Ensure screenshots directory exists
+            FileUtils.forceMkdirParent(destinationFile);
+
+            // Copy screenshot to destination
+            FileUtils.copyFile(screenshotFile, destinationFile);
+            System.out.println("Screenshot saved: " + destinationFile.getAbsolutePath());
+        } catch (Exception e) {
+            System.err.println("Failed to capture screenshot: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void clickShopNav() {

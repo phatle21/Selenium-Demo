@@ -46,6 +46,10 @@ public class BaseTest {
                 throw new RuntimeException("WebDriver initialization failed");
             }
 
+            // Maximize the browser window
+            driver.manage().window().maximize();
+            logger.info("Browser window maximized successfully");
+
             wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             logger.info("WebDriver and WebDriverWait initialized successfully");
         } catch (Exception e) {
