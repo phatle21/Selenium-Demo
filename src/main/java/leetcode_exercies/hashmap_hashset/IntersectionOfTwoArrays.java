@@ -10,6 +10,9 @@ Mục tiêu: Trả về phần tử chung của 2 mảng.
 
 public class IntersectionOfTwoArrays {
 
+//    public int[] intersection(int[] nums1, int[] nums2) {
+//
+//    }
 
     public static void main(String[] args) {
 

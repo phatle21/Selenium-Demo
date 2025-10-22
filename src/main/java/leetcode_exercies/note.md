@@ -48,6 +48,9 @@ Tư duy chính:
 → Ghi nhớ kết quả con, tối ưu bài toán chia nhỏ.
 
 
+.length Arrays in Java, JavaScript,.. (property) let arr = [1, 2, 3]; console.log(arr.length); // 3
+.length() string == String name = "OpenAI"; int len = name.length();  // 6 (method)
+.size() collections (like ArrayList, HashSet, HashMap) (method)
 
 
 
