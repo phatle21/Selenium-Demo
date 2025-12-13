@@ -1,0 +1,22 @@
+HashMap là một cấu trúc dữ liệu ánh xạ (key → value) trong Java.
+Mỗi key là duy nhất (unique).+
+HashMap<Integer, String> map = new HashMap<>();
+Ví dụ: ánh xạ mã sinh viên (số nguyên) đến tên sinh viên (chuỗi)
+
+Phương thức	                    Chức năng
+put(key, value)	                Thêm hoặc cập nhật phần tử
+get(key)	                    Lấy giá trị tương ứng với key
+containsKey(key)	            Kiểm tra xem key có tồn tại không
+containsValue(value)	        Kiểm tra xem có giá trị value trong map không
+remove(key)	                    Xóa phần tử theo key
+size()	                        Trả về số phần tử trong map
+isEmpty()	                    Kiểm tra map có rỗng không
+keySet()	                    Lấy tập hợp tất cả key
+values()	                    Lấy tất cả value
+entrySet()	                    Lấy tập hợp các cặp key-value
+
+HashMap: dùng để lưu trữ cặp key-value, nhanh chóng tìm giá trị theo key.
+HashSet: dùng để lưu các phần tử không trùng lặp, chỉ cần biết phần tử có tồn tại hay không.
+
+HashSet: Lưu trữ các phần tử độc nhất (unique) - Không cho phép trùng phần tử
+add(element), contains(element), remove(element)
