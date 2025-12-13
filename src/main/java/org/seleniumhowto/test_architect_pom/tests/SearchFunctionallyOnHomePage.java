@@ -1,9 +1,11 @@
 package org.seleniumhowto.test_architect_pom.tests;
 
-import org.junit.Before;
-import org.junit.Test;
+import com.aventstack.extentreports.*;
+import org.testng.annotations.*;
+import org.testng.Assert;
 import org.seleniumhowto.test_architect_pom.base.BaseTest;
 import org.seleniumhowto.test_architect_pom.pages.*;
+import org.seleniumhowto.test_architect_pom.utils.ExtentReportManager;
 
 public class SearchFunctionallyOnHomePage extends BaseTest {
     private HomePage homePage;
@@ -12,7 +14,15 @@ public class SearchFunctionallyOnHomePage extends BaseTest {
     private OrderStatusPage orderStatusPage;
     private InforProductsPageAfterSearch inforProductsPageAfterSearch;
 
-    @Before
+    private static ExtentReports extent;
+    private ExtentTest test;
+
+    @BeforeSuite
+    public void setupReport() {
+        extent = ExtentReportManager.getInstance();
+    }
+
+    @BeforeMethod
     public void setUpPages() {
         homePage = new HomePage(driver, wait);
         shoppingCartPage = new ShoppingCartPage(driver, wait);
@@ -21,19 +31,39 @@ public class SearchFunctionallyOnHomePage extends BaseTest {
         inforProductsPageAfterSearch = new InforProductsPageAfterSearch(driver, wait);
     }
 
-    @Test
+    @Test(description = "Verify search functionality on Home Page using keyword 'laser'")
     public void searchFunctionallyOnHomePage() {
-        // Step 1: Go to home page and close popup
-        homePage.goToHomePage();
-        homePage.clickPopupAd();
+        test = extent.createTest("Search Functionality Test");
 
-        // Step 2: In Search textbox, enter search keyword 'laser'
-        String keyWord = "laser";
-        inforProductsPageAfterSearch.inputDataSearchBar(keyWord);
-        // VP: - n Products Found
-        String quantityProductsFound = inforProductsPageAfterSearch.getTextQuantityProductsFound();
-        System.out.println(quantityProductsFound);
-        // page only displays exactly "n product with name matched the given keyword"
-        inforProductsPageAfterSearch.verifySearchResultsContain(keyWord);
+        try {
+            // Ensure WebDriver is initialized
+            Assert.assertNotNull(driver, "WebDriver is null, initialization failed");
+
+            // Step 1: Go to home page and close popup
+            homePage.goToHomePage();
+            homePage.clickPopupAd();
+            test.log(Status.INFO, "Opened homepage and closed popup ad");
+
+            // Step 2: In Search textbox, enter search keyword 'laser'
+            String keyWord = "laser";
+            inforProductsPageAfterSearch.inputDataSearchBar(keyWord);
+            test.log(Status.INFO, "Entered search keyword: " + keyWord);
+
+            // Verify search results
+            String quantityProductsFound = inforProductsPageAfterSearch.getTextQuantityProductsFound();
+            test.log(Status.INFO, "Found products: " + quantityProductsFound);
+
+            inforProductsPageAfterSearch.verifySearchResultsContain(keyWord);
+            test.pass("All search results contain keyword: " + keyWord);
+
+        } catch (Exception e) {
+            test.fail("Test failed: " + e.getMessage());
+            Assert.fail(e.getMessage());
+        }
+    }
+
+    @AfterSuite
+    public void tearDownReport() {
+        extent.flush(); // Export HTML report
     }
 }
